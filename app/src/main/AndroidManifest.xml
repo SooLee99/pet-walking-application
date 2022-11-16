@@ -37,6 +37,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".BoardUpdateActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".DiaryAdd1Activity"
             android:exported="false">
             <meta-data

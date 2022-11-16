@@ -101,27 +101,4 @@ public class Diary1Activity extends AppCompatActivity {
         });
 
     }
-
-        /*(if(idToken.equals(firebaseUser.getUid())) {
-            btn_update.setVisibility(View.VISIBLE);
-            btn_update.setEnabled(true);
-            btn_update.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(DetailActivity.this, BoardUpdateActivity.class);
-                    intent.putExtra("idToken", idToken);
-                    intent.putExtra("name", name);
-                    intent.putExtra("content", content);
-                    intent.putExtra("title", title);
-                    intent.putExtra("date", date);
-                    intent.putExtra("field", field);
-                    intent.putExtra("itemList", itemList);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        } else {
-            btn_update.setVisibility(View.GONE);
-            btn_update.setEnabled(false);
-        }*/
 }

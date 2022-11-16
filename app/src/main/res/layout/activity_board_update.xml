@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DiaryUpdate1Activity">
+    tools:context=".BoardUpdateActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Diary Note"
+        android:text="자유게시판 게시물 수정"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="10pt"
@@ -95,16 +95,26 @@
                     android:text="12:00:00" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/iv_photo"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:background="@color/black"
-                android:layout_marginRight="20dp">
+                android:layout_height="wrap_content">
 
-            </ImageView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:text="작성자 : " />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:text="12:00:00" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/et_content"
@@ -118,20 +128,9 @@
                 android:padding="5dp"
                 android:gravity="top"/>
 
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/mUploadBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:text="사진 업로드"/>
-
             <Button
                 android:id="@+id/btn_insert"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"

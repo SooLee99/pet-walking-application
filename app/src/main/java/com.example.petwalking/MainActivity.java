@@ -26,23 +26,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-         @Override
-         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-             switch(item.getItemId()) {
-                 case R.id.item_main:
-                     setFrag(0);
-                     break;
-                 case R.id.item_daily:
-                     setFrag(1);
-                     break;
-                 case R.id.item_board:
-                     setFrag(2);
-                     break;
-                 case R.id.item_setting:
-                     setFrag(3);
-                     break;
-             }
-             return true;
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    case R.id.item_main:
+                        setFrag(0);
+                        break;
+                    case R.id.item_daily:
+                        setFrag(1);
+                        break;
+                    case R.id.item_board:
+                        setFrag(2);
+                        break;
+                    case R.id.item_setting:
+                        setFrag(3);
+                        break;
+                }
+                return true;
             }
         });
 

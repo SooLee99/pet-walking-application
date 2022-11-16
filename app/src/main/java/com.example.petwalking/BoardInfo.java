@@ -5,6 +5,7 @@ public class BoardInfo {
     private String content;
     private String title;
     private String date;
+    private String time;
     private String idToken;
 
     // 생성자 삭제하면 안됌!
@@ -40,6 +41,14 @@ public class BoardInfo {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getIdToken() {
