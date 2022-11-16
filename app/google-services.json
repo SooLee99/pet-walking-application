@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "503799553585",
+    "firebase_url": "https://petwalking-a43e9-default-rtdb.firebaseio.com",
+    "project_id": "petwalking-a43e9",
+    "storage_bucket": "petwalking-a43e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503799553585:android:3762cfedffe8c673dd7f10",
+        "android_client_info": {
+          "package_name": "com.example.petwalking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503799553585-aui1744qht2sq2qe1ofthpi56vik24as.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_070IbfE9Gqm7z0WscCkI5dbJp5SiJG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503799553585-aui1744qht2sq2qe1ofthpi56vik24as.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

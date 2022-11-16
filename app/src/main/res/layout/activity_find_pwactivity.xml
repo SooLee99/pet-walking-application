@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/backgroundColor">
+
+    <TextView
+        android:id="@+id/tv_findPWD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="비밀번호 찾기"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:background="@color/backgroundColor"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/iv_DogWalkCycle_gif"
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:background="@color/backgroundColor"
+        android:src="@mipmap/dogwalkcycle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/backgroundoval"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:text="E-mail"
+            android:textSize="18dp"
+            android:paddingTop="20dp"
+            android:layout_marginLeft="13dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="이메일을 입력해주세요."
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:inputType="textEmailAddress" />
+
+        <Button
+            android:id="@+id/btn_sendEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/oval"
+            android:textStyle="bold"
+            android:text="이메일에 전송"
+            android:textSize="18dp" />
+
+        <!--<Button
+            android:id="@+id/btn_moveLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/oval"
+            android:textStyle="bold"
+            android:text="로그인 화면으로 이동"
+            android:textSize="18dp" /-->
+    </LinearLayout>
+
+</LinearLayout>

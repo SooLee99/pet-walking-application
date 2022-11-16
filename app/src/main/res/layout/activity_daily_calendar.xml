@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="1"
+    android:background="@color/backgroundColor"
+    tools:context=".CalenderActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Calendar"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="@color/backgroundColor"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_ellipse"
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="70dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="@string/pre"
+                android:textColor="@color/black"
+                android:background="@null"
+                android:textStyle="bold"
+                android:onClick="previousDayAction"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/monthDayText"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="2022년 12월 25일"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="@string/next"
+                android:textColor="@color/black"
+                android:background="@null"
+                android:textStyle="bold"
+                android:onClick="nextDayAction"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dayOfWeekTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="일요일"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/gray"
+            android:textAlignment="center"
+            android:textSize="18sp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="일정추가"
+            android:textColor="@color/black"
+            android:background="@null"
+            android:onClick="newEventAction"
+            android:layout_gravity="center"
+            android:textSize="20sp"/>
+
+        <ListView
+            android:id="@+id/hourListView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"/>
+    </LinearLayout>
+
+</LinearLayout>

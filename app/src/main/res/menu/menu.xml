@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_main"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:iconTint="@color/teal_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:title="홈" />
+    <item
+        android:id="@+id/item_daily"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_create_24"
+        android:iconTint="@color/teal_200"
+        android:title="일기" />
+    <item
+        android:id="@+id/item_board"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_contact_mail_24"
+        android:iconTint="@color/teal_200"
+        android:title="게시판" />
+    <item
+        android:id="@+id/item_setting"
+        android:enabled="true"
+        android:icon="@drawable/ic_settings"
+        android:iconTint="@color/teal_200"
+        android:title="설정" />
+
+</menu>
