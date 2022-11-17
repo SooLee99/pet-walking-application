@@ -44,7 +44,7 @@ import java.math.BigInteger;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private FirebaseAuth mFirebaseAuth;             // 파이어베이스 인증처리하는 객체
-    private DatabaseReference mDatabaseRef;         // 실시간 데이터베이스 연동하는 객체
+    private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
     private EditText mEtEmail, mEtPwd;              // 로그인 입력 필드
     private Button btn_login;
     private TextView btn_register, btn_findIdPwd;
@@ -68,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         // 객체 초기화
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("PetWalking");
 
         // 필드 초기화
         mEtEmail = findViewById(R.id.et_email);
@@ -171,15 +170,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onSuccess(MeV2Response result) {
                         // 카카오로그인이 성공한 경우
-                        Intent userIntent = new Intent(LoginActivity.this, UserInfoActivity.class);
 
                         // 파이어베이스에 회원정보를 입력하기 위한 임시 코드 (회원정보를 확인하기 위해 이메일, 비밀번호를 임시로 저장시킴.)
-                        userIntent.putExtra("email", result.getKakaoAccount().getEmail());
-                        userIntent.putExtra("name", result.getKakaoAccount().getProfile().getNickname());
-                        //userIntent.putExtra("profileImg", result.getKakaoAccount().getProfile().getProfileImageUrl());
-
-                        String strName = userIntent.getStringExtra("name");
-                        String strEmail = userIntent.getStringExtra("email");
+                        String strName = result.getKakaoAccount().getProfile().getNickname();
+                        String strEmail = result.getKakaoAccount().getEmail();
                         String strPwd = toHex(strName).substring(30, 40);
 
                         //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
@@ -189,27 +183,28 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         else {
                             strEmail = "kakao"+strPwd+"@gmail.com";
                         }
-                        // FireBase Auth 진행
+
                         mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 // 회원가입이 성공했을 경우
                                 FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 현재 로그인 된 유저의 정보를 가져온다.
                                 UserAccount accountKakao = new UserAccount();
-
                                 accountKakao.setIdToken(firebaseUser.getUid());
                                 accountKakao.setEmailId(firebaseUser.getEmail());
                                 accountKakao.setPassword(strPwd);
                                 accountKakao.setName(strName);
-
+                                accountKakao.setResult("카카오");
+                                Log.d("여기 지나가는거 아니였어?", "정보");
+                                
                                 // setValue() : DB에 UserAccount 정보를 insert 함.
                                 mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(accountKakao);
+                                Toast.makeText(LoginActivity.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();   // 현재 액티비티 파괴
                             }
                         });
-
-                        Toast.makeText(LoginActivity.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();   // 현재 액티비티 파괴
+                        Log.d("난 모르겠당", "정보");
                     }
                 });
 
@@ -269,6 +264,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             userAccountGoogle.setIdToken(firebaseUser.getUid());
                             userAccountGoogle.setEmailId(firebaseUser.getEmail());
                             userAccountGoogle.setName(firebaseUser.getDisplayName());
+                            userAccountGoogle.setResult("구글");
 
                             // setValue() : DB에 UserAccount 정보를 insert 함.
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(userAccountGoogle);

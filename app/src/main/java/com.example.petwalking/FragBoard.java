@@ -43,7 +43,6 @@ public class FragBoard extends Fragment {
     private ImageButton searchBtn;
     private TextView searchText;
     private String search, title;
-    private long backBtnTime = 0;
 
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -132,16 +131,4 @@ public class FragBoard extends Fragment {
     public CreationExtras getDefaultViewModelCreationExtras() {
         return super.getDefaultViewModelCreationExtras();
     }
-
-    /*public void onBackPressed(){
-        long curTime = System.currentTimeMillis();
-        long gapTime = curTime - backBtnTime;
-
-        if(0 <= gapTime && 2000 >= gapTime) {
-            super.onBackPressed();
-        } else {
-            backBtnTime = curTime;
-            Toast.makeText(getActivity(),"한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
-        }
-    }*/
 }

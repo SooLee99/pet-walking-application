@@ -225,8 +225,8 @@ public class MapActivity extends AppCompatActivity implements TMapGpsManager.onL
         // Initial Setting
         tMapGPS.setMinTime(1);
         tMapGPS.setMinDistance(1);
-        tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER);
-        //tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);
+        //tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER);
+        tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);
 
         tMapGPS.OpenGps();
 

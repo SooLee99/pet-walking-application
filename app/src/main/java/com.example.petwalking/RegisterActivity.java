@@ -98,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                                     // 회원가입 완료 출력
                                                     Toast.makeText(RegisterActivity.this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                    Intent intent = new Intent(RegisterActivity.this, ActivityDogInfoADD.class);
                                                     startActivity(intent);
                                                     finish();   // 현재 액티비티 파괴
                                                 } else {

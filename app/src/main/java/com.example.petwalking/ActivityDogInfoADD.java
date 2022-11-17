@@ -1,20 +1,11 @@
 package com.example.petwalking;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,8 +14,13 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,9 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-public class ActivityDogInfo extends AppCompatActivity {
+public class ActivityDogInfoADD extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();                              // 파이어베이스 데이터베이스 연동
     private FirebaseDatabase mFirebaseDB = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabaseRef = mFirebaseDB.getInstance().getReference();
@@ -58,7 +53,7 @@ public class ActivityDogInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dog_info);
+        setContentView(R.layout.activity_dog_info_add);
 
         // 파이어베이스 데이터베이스 연동
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -72,80 +67,14 @@ public class ActivityDogInfo extends AppCompatActivity {
 
         // 반려동물 생년월일
         DatePicker datePicker = findViewById(R.id.dataPicker);
-
-        final DogInfo[] dogInfo = {new DogInfo()};
-        //데이터 읽기
-        mDatabaseRef.child("DogInfo").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        datePicker.init(2022,02,02, new DatePicker.OnDateChangedListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) { //참조에 액세스 할 수 없을 때 호출
-                name = "";
-                bread = "";
-                gender = "";
-                birth = "";
-                weight="";
-
-                datePicker.init(2022, 01, 01, new DatePicker.OnDateChangedListener() {
-                    @Override
-                    public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        strBirth = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
-                    }
-                });
-
-                Log.d("반려동물 정보수정 클래스 에러1", "파이어베이스 참조 실패");
-            }
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dogInfo[0] = snapshot.getValue(DogInfo.class);
-                if (dogInfo[0] == null || dogInfo[0].equals(null)) {
-                    name = "";
-                    bread = "";
-                    gender = "";
-                    birth = "";
-                    weight="";
-
-                    datePicker.init(2022, 01, 01, new DatePicker.OnDateChangedListener() {
-                        @Override
-                        public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            strBirth = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
-                        }
-                    });
-                    Log.d("반려동물 정보수정 클래스 에러2", "파이어베이스 정보 불러오는 거 실패");
-                } else {
-                    Log.d("일단 여기는 지나갑니당", "여기 지나감!");
-                    name = dogInfo[0].getDogName();
-                    bread = dogInfo[0].getDogBreed();
-                    gender = dogInfo[0].getDogGender();
-                    birth = dogInfo[0].getDogBirth();
-                    weight = dogInfo[0].getDogWeight();
-
-                    if(dogInfo[0].getDogImg() != null || dogInfo[0].getDogImg().equals("") ) {
-                        photo = dogInfo[0].getDogImg();
-                        iv_photo.setImageURI(Uri.parse(photo));
-                        imageUri = Uri.parse(photo);
-                    }
-
-                    Log.d("파이어베이스로부터 받은 생일", birth);
-                    mEtdogName.setText(name);
-                    mEtdogBreed.setText(bread);
-                    mEtweight.setText(weight);
-
-                    String[] birthArr = birth.split("-");
-                    for(int i = 0; i < 3; i++){
-                        Log.d("일단 여기는 지나갑니당", String.valueOf(Integer.parseInt(birthArr[i])));
-                    }
-                    datePicker.init(Integer.parseInt(birthArr[0]), Integer.parseInt(birthArr[1])-1, Integer.parseInt(birthArr[2]), new DatePicker.OnDateChangedListener() {
-                        @Override
-                        public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                            strBirth = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
-                            Log.d("생일", strBirth);
-                        }
-                    });
-                }
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                strBirth = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
+                Log.d("생일", strBirth);
             }
         });
-        if(photo != null) {
-            iv_photo.setImageURI(Uri.parse(photo));
-        }
+
         // 반려동물 성별
         mSpGender = findViewById(R.id.sp_gender);
         ArrayAdapter adapterGender = ArrayAdapter.createFromResource(this,
@@ -186,7 +115,7 @@ public class ActivityDogInfo extends AppCompatActivity {
 
                 // 사진업로드
                 if (strDogImage.equals("") || strDogName.equals("")  || strDogBread.equals("") || strDogGender.equals("")  || strDogWeight.equals("") ) {
-                    Toast.makeText(ActivityDogInfo.this, "입력하신 정보를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActivityDogInfoADD.this, "모든 정보를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     // 방금 로그인 성공한 유저의 정보를 가져오는 객체
                     FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
@@ -205,8 +134,10 @@ public class ActivityDogInfo extends AppCompatActivity {
                     // setValue : DB 하위주소(UserAccount)에 정보를 삽입함. (2022-10-21 이수)
                     mDatabaseRef.child("DogInfo").child(firebaseUser.getUid()).setValue(dogInfo);
 
-                    Toast.makeText(ActivityDogInfo.this, "수정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Toast.makeText(ActivityDogInfoADD.this, "반려동물 정보가 등록되었습니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ActivityDogInfoADD.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();   // 현재 액티비티 파괴
                 }
             }
         });

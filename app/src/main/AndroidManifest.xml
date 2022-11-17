@@ -23,6 +23,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityUserInfo"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".DiaryUpdateActivity"
             android:exported="false">
             <meta-data
@@ -38,6 +45,13 @@
         </activity>
         <activity
             android:name=".BoardUpdateActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ActivityDogInfoADD"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

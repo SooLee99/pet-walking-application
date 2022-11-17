@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.storage.FirebaseStorage;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,24 +68,90 @@ public class FragHome extends Fragment {
     private Button btn_calender, btn_walk;
     private ImageButton btn_reset;
     private TextView tvLocation, tvWeather, tvTemperatures, tvDogName, tv_DogBreed, tv_DogBirth, tv_DogGender, tv_DogWeight;
-    private String baseDate;                                               // 조회하고 싶은 날짜
-    private String baseTime;                                               // 조회하고 싶은 시간
-    private String weather;                                                // 날씨 결과
-    private String tmperature;                                             // 기온 결과
+    private String baseDate, baseTime, weather,tmperature, weatherResult, photo;                                             // 기온 결과
     private View view;
-    private ImageView ivWeather, ivDog;
+    private ImageView ivWeather;
+    private RoundedImageView ivDog;
     public static String weatherSave = "현재 날씨는 맑은 상태입니다.";
 
     // 위치 정보
     private double longitude = 37.4481;    // 인하공전 경도
     private double latitude = 126.6585;    // 인하공전 위도
-    private String weatherResult = "";     // 날씨정보
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_home, container, false);
-        read();
+        tvDogName = view.findViewById(R.id.tv_DogName);
+        tv_DogBreed = view.findViewById(R.id.tv_DogBreed);
+        tv_DogBirth = view.findViewById(R.id.tv_DogBirth);
+        tv_DogGender = view.findViewById(R.id.tv_DogGender);
+        tv_DogWeight = view.findViewById(R.id.tv_DogWeight);
+        ivDog = view.findViewById(R.id.iv_Dog);
+
+        //데이터 읽기
+        final DogInfo[] dogInfo = {new DogInfo()};
+        mDatabaseRef.child("DogInfo").child("DogInfo").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            // 참조에 액세스 할 수 없을 때 호출
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                tvDogName.setText("이름을 입력해주세요.");
+                tv_DogBreed.setText("견종을 입력해주세요.");
+                tv_DogBirth.setText("생일을 입력해주세요.");
+                tv_DogGender.setText("성별을 입력해주세요.");
+                tv_DogWeight.setText("몸무게를 입력해주세요.");
+                Toast.makeText(getActivity(), "액세스가 거부되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dogInfo[0] = snapshot.getValue(DogInfo.class);
+                if(dogInfo[0] == null) {
+                    Log.d("여기", "1");
+                    tvDogName.setText("이름을 입력해주세요.");
+                    tv_DogBreed.setText("견종을 입력해주세요.");
+                    tv_DogBirth.setText("생일을 입력해주세요.");
+                    tv_DogGender.setText("성별을 입력해주세요.");
+                    tv_DogWeight.setText("몸무게를 입력해주세요.");
+                    ivDog.setImageResource(R.drawable.dog);
+                } else {
+                    Log.d("여기", "2");
+                    if(dogInfo[0].getDogName().equals("")) {
+                        tvDogName.setText("이름을 입력해주세요.");
+                    } else {
+                        tvDogName.setText(dogInfo[0].getDogName());
+                    }
+
+                    if(dogInfo[0].getDogBreed().equals("")) {
+                        tv_DogBreed.setText("견종을 입력해주세요.");
+                    } else {
+                        tv_DogBreed.setText(dogInfo[0].getDogBreed());
+                    }
+
+                    if(dogInfo[0].getDogBirth().equals("")) {
+                        tv_DogBirth.setText("생일을 입력해주세요.");
+                    } else {
+                        tv_DogBirth.setText(dogInfo[0].getDogBirth());
+                    }
+                    if(dogInfo[0].getDogGender().equals("")) {
+                        tv_DogGender.setText("성별을 입력해주세요.");
+                    } else {
+                        tv_DogGender.setText(dogInfo[0].getDogGender());
+                    }
+                    if(dogInfo[0].getDogWeight().equals("")) {
+                        tv_DogWeight.setText("몸무게를 입력해주세요.");
+                    } else {
+                        tv_DogWeight.setText(dogInfo[0].getDogWeight());
+                    }
+                    if ((dogInfo[0].getDogImg()).equals("null"))
+                        ivDog.setImageResource(R.drawable.dog);
+                    else {
+                        photo = dogInfo[0].getDogImg();
+                        ivDog.setImageURI(Uri.parse(photo));
+                    }
+                }
+            }
+        });
         btn_walk = view.findViewById(R.id.btn_walk);    // 산책 버튼
         //btn_calender = view.findViewById(R.id.btn_calender);
         btn_reset = view.findViewById(R.id.btn_reset);  // 날씨, 위치 리셋버튼
@@ -94,22 +162,6 @@ public class FragHome extends Fragment {
         // 날씨 이미지 뷰
         ivWeather = view.findViewById(R.id.ivWeather);
         Glide.with(this).load(R.mipmap.sun).into(ivWeather);
-
-        /*// 강아지 사진
-        ivDog = view.findViewById(R.id.iv_Dog);
-        mDatabase.getReference("dog.png").getDownloadUrl()
-        .addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(getActivity()).load(uri).into(ivDog);
-            }
-        })
-        .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                Glide.with(getActivity()).load(R.drawable.dog).into(ivDog);
-            }
-        });*/
 
         /* 달력 버튼
         btn_calender.setOnClickListener(new View.OnClickListener() {
@@ -335,48 +387,5 @@ public class FragHome extends Fragment {
             weatherResult = weather + "," + tmperature;
         }
         return weatherResult;
-    }
-
-    // 강아지 이름 변경을 위한 메소드
-    private void read() {
-        // 강아지 정보
-        tvDogName = view.findViewById(R.id.tv_DogName);
-        tv_DogBreed = view.findViewById(R.id.tv_DogBreed);
-        tv_DogBirth = view.findViewById(R.id.tv_DogBirth);
-        tv_DogGender = view.findViewById(R.id.tv_DogGender);
-        tv_DogWeight = view.findViewById(R.id.tv_DogWeight);
-
-        final DogInfo[] dogInfo = {new DogInfo()};
-        //데이터 읽기
-        mDatabaseRef.child("DogInfo").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            // 참조에 액세스 할 수 없을 때 호출
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                tvDogName.setText("이름을 입력해주세요.");
-                tv_DogBreed.setText("견종을 입력해주세요.");
-                tv_DogBirth.setText("생일을 입력해주세요.");
-                tv_DogGender.setText("성별을 입력해주세요.");
-                tv_DogWeight.setText("몸무게를 입력해주세요.");
-                Toast.makeText(getActivity(), "액세스가 거부되었습니다.", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dogInfo[0] = snapshot.getValue(DogInfo.class);
-                if(dogInfo[0] == null || dogInfo[0].getDogName() == null || dogInfo[0].getDogName().length() == 0 || dogInfo[0].equals(null)) {
-                    tvDogName.setText("이름을 입력해주세요.");
-                    tv_DogBreed.setText("견종을 입력해주세요.");
-                    tv_DogBirth.setText("생일을 입력해주세요.");
-                    tv_DogGender.setText("성별을 입력해주세요.");
-                    tv_DogWeight.setText("몸무게를 입력해주세요.");
-                } else {
-                    tvDogName.setText(dogInfo[0].getDogName());
-                    tv_DogBreed.setText(dogInfo[0].getDogBreed());
-                    tv_DogBirth.setText(dogInfo[0].getDogBirth());
-                    tv_DogGender.setText(dogInfo[0].getDogGender());
-                    tv_DogWeight.setText(dogInfo[0].getDogWeight());
-                }
-            }
-        });
     }
 }

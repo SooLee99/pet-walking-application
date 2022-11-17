@@ -62,9 +62,7 @@ public class FindPWActivity extends AppCompatActivity implements View.OnClickLis
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(FindPWActivity.this, "이메일을 보냈습니다.", Toast.LENGTH_LONG).show();
-                                finish();
-                                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                Toast.makeText(FindPWActivity.this, "이메일 전송이 되었습니다.", Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(FindPWActivity.this, "이메일 전송이 실패하였습니다.", Toast.LENGTH_LONG).show();
                             }

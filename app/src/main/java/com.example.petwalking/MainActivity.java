@@ -2,6 +2,7 @@ package com.example.petwalking;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private FragDiary fragDiary;
     private FragSetting fragSetting;
     private FragBoard fragBoard;
-    private int i0, i1, i2, i3;
+    private long backBtnTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
         fragSetting = new FragSetting();
         fragBoard = new FragBoard();
         setFrag(0); // 첫 프래그먼트 화면 지정 선택
-
-        i0 = 0;
-        i1 = 0;
-        i2 = 0;
-        i3 = 0;
     }
 
     // 프래그먼트 교체가 일어나는 실행문
@@ -79,6 +75,19 @@ public class MainActivity extends AppCompatActivity {
                 ft.replace(R.id.main_frame, fragSetting);
                 ft.commit();
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime- backBtnTime;
+
+        if(0 <= gapTime && 2000 >= gapTime) {
+            super.onBackPressed();
+        } else {
+            backBtnTime = curTime;
+            Toast.makeText(this,"한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
     }
 }

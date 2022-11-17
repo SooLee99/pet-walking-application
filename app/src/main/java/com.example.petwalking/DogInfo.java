@@ -7,6 +7,7 @@ public class DogInfo {
     private String dogGender;      // 성별
     private String dogBirth;       // 생년월일
     private String dogWeight;      // 몸무게
+    private String dogImg;
 
     public DogInfo() {
     }
@@ -59,4 +60,11 @@ public class DogInfo {
         this.idToken = idToken;
     }
 
+    public String getDogImg() {
+        return dogImg;
+    }
+
+    public void setDogImg(String dogImg) {
+        this.dogImg = dogImg;
+    }
 }

@@ -44,7 +44,20 @@ public class BoardAddActivity extends AppCompatActivity {
         tv_name = findViewById(R.id.tv_name);
         et_content = findViewById(R.id.et_content);
 
-        readName();
+        //데이터 읽기
+        mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { //참조에 액세스 할 수 없을 때 호출
+                tv_name.setText("회원님");
+            }
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                final UserAccount[] userInfo = {new UserAccount()};
+                userInfo[0] = snapshot.getValue(UserAccount.class);
+                tv_name.setText(userInfo[0].getName());
+            }
+        });
 
         // 현재 날짜 가져오기
         long now = System.currentTimeMillis();
@@ -77,30 +90,6 @@ public class BoardAddActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(BoardAddActivity.this, "게시물 저장이 완료되었습니다.", Toast.LENGTH_SHORT);
                 toast.show();
                 finish();
-            }
-        });
-    }
-
-    // 찐 이름 가져오는 메소드
-    private void readName() {
-        final UserAccount[] userInfo = {new UserAccount()};
-        //데이터 읽기
-        mDatabaseRef.child("PetWalking").child("UserAccount").child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { //참조에 액세스 할 수 없을 때 호출
-                tv_name.setText("회원님");
-            }
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userInfo[0] = snapshot.getValue(UserAccount.class);
-                if (userInfo[0] == null || userInfo[0].getName() == null || userInfo[0].getName().length() == 0 || userInfo[0].equals(null))
-                    tv_name.setText("회원님");
-                else {
-                    tv_name.setText(userInfo[0].getName());
-                    Log.d("이름", userInfo[0].getName());
-                }
             }
         });
     }
