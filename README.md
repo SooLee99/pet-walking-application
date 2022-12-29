@@ -1,6 +1,6 @@
 # PetWalking
-(2022) 2학년 2학기 모바일 프로젝트 - 애완동물 산책 어플
-![image](https://user-images.githubusercontent.com/97524700/209979261-035a0034-cb3b-45d8-a478-0a81fe322b73.png)
+(2022) 2학년 2학기 모바일 프로젝트 - 애완동물 산책 어플  
+![image](https://user-images.githubusercontent.com/97524700/209979261-035a0034-cb3b-45d8-a478-0a81fe322b73.png)  
 
 ##### 1. 로그인  
 < 요구사항 >  
