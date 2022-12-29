@@ -43,7 +43,7 @@ import com.kakao.util.exception.KakaoException;
 import java.math.BigInteger;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-    private FirebaseAuth mFirebaseAuth;             // 파이어베이스 인증처리하는 객체
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();            // 파이어베이스 인증처리하는 객체
     private DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference();
     private EditText mEtEmail, mEtPwd;              // 로그인 입력 필드
     private Button btn_login;
@@ -65,9 +65,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // 이미지 뷰
         dog = findViewById(R.id.iv_DogWalkCycle_gif);
         Glide.with(this).load(R.mipmap.dogwalkcycle).into(dog);
-
-        // 객체 초기화
-        mFirebaseAuth = FirebaseAuth.getInstance();
 
         // 필드 초기화
         mEtEmail = findViewById(R.id.et_email);
@@ -127,7 +124,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        // 구글 로그인 시 설정 세팅
+        // 구글 로그인 시 설정
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -194,8 +191,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 accountKakao.setPassword(strPwd);
                                 accountKakao.setName(strName);
                                 accountKakao.setResult("카카오");
-                                Log.d("여기 지나가는거 아니였어?", "정보");
-                                
+
                                 // setValue() : DB에 UserAccount 정보를 insert 함.
                                 mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(accountKakao);
                                 Toast.makeText(LoginActivity.this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
@@ -204,7 +200,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 finish();   // 현재 액티비티 파괴
                             }
                         });
-                        Log.d("난 모르겠당", "정보");
                     }
                 });
 

@@ -86,14 +86,6 @@ public class PhoneAuthActivity extends AppCompatActivity implements View.OnClick
         mAuth = FirebaseAuth.getInstance();
         mAuth.setLanguageCode("ko-KR");
 
-        /*
-        //초기(라디오버튼을 누르지않는상태) 에디트텍스트와 버튼을 비활성화시킴
-        request_button.setEnabled(false);
-        verify_Button.setEnabled(false);
-        mName.setEnabled(false);
-        mPhone_number.setEnabled(false);
-        verify_code.setEnabled(false);*/
-
         verify_Button.setEnabled(false);
         request_button.setOnClickListener(this);
         resend_button.setOnClickListener(this);
@@ -174,34 +166,6 @@ public class PhoneAuthActivity extends AppCompatActivity implements View.OnClick
                     startActivity(intent);
                     finish();
 
-                    /*//사용자 라디오버튼이 눌려있다면
-                    if(user_RadioBt.isChecked()){
-                        final Intent intent = new Intent(PhoneAuthActivity.this, ConnectBlueToothActivity.class);
-
-                        //User클래스의 해쉬맵을이용하지않고 아래줄처럼만해도 똑같이 동작함
-                        //mDatabase.child("유저").child("사용자").push().setValue(mPhone_number.getText().toString());
-                        sharedprefEdit.putBoolean("isGuardian",false);
-                        sharedprefEdit.commit();
-
-                        //가입한 유저가 DB에 있는지 검사
-                        checkUserDB(user,"사용자");
-                        startActivity(intent);
-                        finish();
-
-                    }
-                    //보호자 라디오버튼이 눌려있다면
-                    else if(guardian_RadioBt.isChecked()){
-                        final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        //User클래스의 해쉬맵을이용하지않고 아래줄처럼만해도 똑같이 동작함
-                        //mDatabase.child("유저").child("보호자").push().setValue(mPhone_number.getText().toString());
-                        sharedprefEdit.putBoolean("isGuardian",true);
-                        sharedprefEdit.commit();
-
-                        //가입한 유저가 DB에 있는지 검사
-                        checkUserDB(user,"보호자");
-                        startActivity(intent);
-                        finish();
-                    }*/
                 }
                 else { Toast.makeText(PhoneAuthActivity.this, "인증번호가 틀립니다.", Toast.LENGTH_SHORT).show(); }
             }

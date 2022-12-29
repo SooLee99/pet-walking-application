@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Pet Waking"
+        android:text="Pet Walking"
         android:textSize="34sp"
         android:textStyle="bold"
         android:background="@color/backgroundColor"

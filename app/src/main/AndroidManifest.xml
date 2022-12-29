@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.PetWalking">
+
     <!-- 인터넷 / 위치 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -9,6 +11,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 산책지도 걸음 수_센서권한 -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
+    <!-- 사진 불러올 때 권한 -->
+    <!-- Required only if your app needs to access images or photos
+     that other apps created. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:name=".CustomApplication"
@@ -21,13 +28,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        tools:ignore="MissingClass">
         <activity
-            android:name=".ActivityUserInfo"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <intent-filter>
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao3cd9b52483510ed256f98d3015fd7598" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".DiaryUpdateActivity"
@@ -38,6 +56,13 @@
         </activity>
         <activity
             android:name=".Diary1Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ActivityUserInfo1"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -135,25 +160,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-                <data
-                    android:host="oauth"
-                    android:scheme="kakao3cd9b52483510ed256f98d3015fd7598" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
@@ -161,7 +167,7 @@
             android:exported="true" />
         <activity
             android:name=".UserInfoActivity"
-            android:exported="false" /> <!-- 카카오 로그인 연동 -->
+            android:exported="true"/> <!-- 카카오 로그인 연동 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="3cd9b52483510ed256f98d3015fd7598" />
