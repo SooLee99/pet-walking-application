@@ -2,6 +2,8 @@
 (2022) 2학년 2학기 모바일 프로젝트 - 애완동물 산책 어플  
 ___
 ## 1. 로그인  
+<img src= "https://user-images.githubusercontent.com/97524700/213844406-5b6759a9-1e94-4c3e-a07c-299efbaf26f2.png" width="200" height="400">
+
 < 요구사항 >  
 ※ 로그인 인증 기능구현  
 ※ 구글계정과 SSO기능구현(통합회원관리)  
@@ -19,6 +21,8 @@ ___
 ## 2. 회원가입
 < 회원가입 순서 >  
 (1) 사용자 인증 화면 : 사용자의 이름과 휴대폰 번호를 받아 인증메시지를 처리함.    
+<img src= "https://user-images.githubusercontent.com/97524700/213844045-b581f55a-e500-4b22-920a-098e01e72e44.png" width="200" height="400">
+
 < 요구사항 >  
 ※ 사용자에게 인증번호를 메시지로 전송 후, 인증번호 확인  
 
@@ -31,6 +35,9 @@ ___
 - 사용자 인증이 성공한 경우, 회원가입 화면으로 이동.    
 
 (2) 회원가입 화면 : 사용자의 이메일과 비밀번호, 비밀번호 재입력 정보를 받아 회원가입 처리를 함.  
+<img src= "https://user-images.githubusercontent.com/97524700/213844123-338b3a85-d52c-4e01-a7bf-ac488099dbc8.png" width="200" height="400">
+
+
 <요구 사항>  
 ※ 회원 정보를 입력하여 회원가입을 시도  
 
@@ -45,6 +52,9 @@ ___
 - 회원가입이 실패한 경우, 토스트(Toast) 메시지로 회원가입 실패를 알림.    
 
 (3) 반려동물 정보등록 화면 : 반려동물의 정보를 입력 받아 DB에 저장.  
+<img src= "https://user-images.githubusercontent.com/97524700/213844133-fdf52a75-d340-492a-941e-5e5e66218b69.png" width="200" height="400">
+
+
 < 요구 사항 >  
 ※ 반려동물의 정보를 등록  
 
@@ -56,6 +66,7 @@ ___
 ## 3. 비밀번호 재설정  
 < 요구 사항 >  
 ※ 비밀번호 재설정 인증 링크를 이메일에 보내는 기능.  
+<img src= "https://user-images.githubusercontent.com/97524700/213844141-ca821199-4921-43bc-9f87-f4a60455ea3d.png" width="200" height="400">
 
 < 테스트 리스트 >  
 (12/14 테스트 완료 [기종 : GalaxyS22])
@@ -67,6 +78,8 @@ ___
 < 요구 사항 >  
 ※ 화면 상단에는 현재 사용자의 반려동물 정보를 출력.  
 ※ 화면 하단에는 실시간 현재위치의 날씨 정보를 제공.  
+<img src= "https://user-images.githubusercontent.com/97524700/213844234-5b8ab2ed-f3f3-4d4e-b7b7-c24ea35623c6.png" width="200" height="400">
+
   
 < 테스트 리스트 >  
 (12/14 테스트 완료 [기종 : GalaxyS22])  
@@ -80,6 +93,8 @@ ___
 ※ 스마트폰의 GPS로 사용자의 위치를 표시.  
 ※ 산책 거리, 산책 시간, 걸음 수 표시.  
 ※ 화면 상단에 산책 화면 캡처하는 버튼 제공.  
+<img src= "https://user-images.githubusercontent.com/97524700/213844353-391ff1ea-1778-4173-978e-4bf18deca0da.png" width="200" height="400">
+
 
 < 테스트 리스트 >  
 (12/14 테스트 완료 [기종 : GalaxyS22])  
@@ -93,6 +108,7 @@ ___
 ※ 이용자가 작성했던 일기를 수정, 삭제 가능.  
 ※ 이용자는 일기를 작성 가능.  
 ※ 작성자 외에는 일기를 볼 수가 없다.  
+<img src= "https://user-images.githubusercontent.com/97524700/213844280-82c134ef-24c4-4717-8dc4-d63f63e22529.png" width="200" height="400">
 
 <테스트 리스트>  
 (12/14 테스트 완료 [기종 : GalaxyS22])  
@@ -107,6 +123,8 @@ ___
 ※ 게시판에 게시글 등록.    
 ※ 게시글 작성자만 수정과 삭제가 가능. 	  
 ※ 게시글 검색 기능 제공.  
+<img src= "https://user-images.githubusercontent.com/97524700/213844289-2fe5e5c4-db87-4a12-bf3e-e14e4910e692.png" width="200" height="400">
+
 
 < 테스트 리스트 >  
 (12/14 테스트 완료 [기종 : GalaxyS22])  
@@ -118,6 +136,7 @@ ___
 ※ 반려동물의 정보를 입력 및 수정가능.  	
 ※ 회원 정보를 확인할 수 있고, 정보 수정가능.	 
 ※ 로그아웃 기능 제공.  
+<img src= "https://user-images.githubusercontent.com/97524700/213844307-5e4a7420-9dcd-40aa-8be5-5d758950ecc2.png" width="200" height="400">
 
 <테스트 리스트>  
 (12/14 테스트 완료 [기종 : GalaxyS22])  
